@@ -20,17 +20,14 @@ PODS:
   - AFNetworking/UIKit (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Google-Maps-iOS-SDK (1.8.1)
   - PKRevealController (2.0.6)
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.3.1)
-  - Google-Maps-iOS-SDK (~> 1.8.1)
-  - PKRevealController (~> 2.0.6)
+  - AFNetworking
+  - PKRevealController
 
 SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
-  Google-Maps-iOS-SDK: 542561448224b92d790483674b7313b13764e624
   PKRevealController: 4f175a432ad868c806dce1ebb3fd8a35d228bdb5
 
 COCOAPODS: 0.33.1

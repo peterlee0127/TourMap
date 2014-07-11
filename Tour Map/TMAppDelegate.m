@@ -7,30 +7,132 @@
 //
 
 #import "TMAppDelegate.h"
+#import <CoreData/CoreData.h>
 #import "TMViewController.h"
 #import <PKRevealController.h>
+
+
+#import "TMMenuViewController.h"
+#import "TMListViewController.h"
+#import "TMDataSourceListViewController.h"
 
 @interface TMAppDelegate() <PKRevealing>
 
 @property (nonatomic,strong) PKRevealController *revealController;
+@property (nonatomic,strong) TMMenuViewController *menuViewController;
 
 @end
 
 @implementation TMAppDelegate
 
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    
-    self.revealController = [PKRevealController revealControllerWithFrontViewController:<#(UIViewController *)#> leftViewController:<#(UIViewController *)#>]
+    self.menuViewController = [[TMMenuViewController alloc] initWithNibName:@"TMMenuViewController" bundle:nil];
+    TMViewController *mainViewController = [[TMViewController alloc] initWithNibName:@"TMViewController" bundle:nil];
+    self.revealController = [PKRevealController revealControllerWithFrontViewController:mainViewController leftViewController:self.menuViewController];
+    self.revealController.delegate = self;
+    [self addmenuButton:mainViewController];
+
     
     self.window.rootViewController = self.revealController;
     [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFrontVC:) name:@"changeFrontVC" object:nil];
+    
     return YES;
 }
-							
+-(void) showMenu
+{
+    [self.revealController showViewController:self.menuViewController];
+}
+-(void) addmenuButton:(UIViewController *) vc;
+{
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    menuButton.backgroundColor = [UIColor grayColor];
+    [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchDown];
+    [vc.view addSubview:menuButton];
+}
+-(void) changeFrontVC:(NSNotification *) noti
+{
+    NSUInteger index = [[noti object] integerValue];
+    switch (index) {
+        case 0:
+        {
+            TMViewController *mainViewController = [[TMViewController alloc] initWithNibName:@"TMViewController" bundle:nil];
+            [self.revealController setFrontViewController:mainViewController];
+            [self addmenuButton:mainViewController];
+            break;
+        }
+        case 1:
+        {
+            TMListViewController *listViewController = [[TMListViewController alloc] initWithNibName:@"TMListViewController" bundle:nil];
+            [self.revealController setFrontViewController:listViewController];
+            [self addmenuButton:listViewController];
+            break;
+        }
+        case 2:
+        {
+            TMDataSourceListViewController *dataSourceListViewController = [[TMDataSourceListViewController alloc] initWithNibName:@"TMDataSourceListViewController" bundle:nil];
+            [self.revealController setFrontViewController:dataSourceListViewController];
+            [self addmenuButton:dataSourceListViewController];
+            break;
+        }
+        default:
+            break;
+    }
+     [self.revealController showViewController:self.revealController.rightViewController];
+}
+
+#pragma mark - Core Data stack
+
+-(NSManagedObjectContext *) managedObjectContext {
+    if (_managedObjectContext != nil) {
+        return _managedObjectContext;
+    }
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [_managedObjectContext setPersistentStoreCoordinator: coordinator];
+    }
+    
+    return _managedObjectContext;
+}
+
+- (NSManagedObjectModel *)managedObjectModel {
+    if (_managedObjectModel != nil) {
+        return _managedObjectModel;
+    }
+    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    
+    return _managedObjectModel;
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    if (_persistentStoreCoordinator != nil) {
+        return _persistentStoreCoordinator;
+    }
+    NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory]
+                                               stringByAppendingPathComponent: @"TourMap.sqlite"]];
+    NSError *error = nil;
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
+                                   initWithManagedObjectModel:[self managedObjectModel]];
+    if(![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                  configuration:nil URL:storeUrl options:nil error:&error]) {
+        /*Error for store creation should be handled in here*/
+    }
+    
+    return _persistentStoreCoordinator;
+}
+
+- (NSString *)applicationDocumentsDirectory {
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
