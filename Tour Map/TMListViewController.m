@@ -7,6 +7,7 @@
 //
 
 #import "TMListViewController.h"
+#import "TMListTableViewCell.h"
 
 @interface TMListViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -28,7 +29,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.listTableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    self.title =@"Place List";
+    self.listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    [self.listTableView registerNib:[UINib nibWithNibName:@"TMListTableViewCell" bundle:nil] forCellReuseIdentifier:@"ListCell"];
     self.listTableView.delegate = self;
     self.listTableView.dataSource = self;
     [self.view addSubview:self.listTableView];
@@ -51,7 +54,10 @@
 {
     return 10;
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

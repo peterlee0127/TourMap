@@ -10,6 +10,8 @@
 		B634E0D3F56C432390346BF3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A196262872554D9A97D93542 /* libPods.a */; };
 		D006F317196D3ACA0086D383 /* TMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D006F315196D3ACA0086D383 /* TMListViewController.m */; };
 		D006F318196D3ACA0086D383 /* TMListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D006F316196D3ACA0086D383 /* TMListViewController.xib */; };
+		D01210F919737A970097B09B /* TMListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D01210F719737A970097B09B /* TMListTableViewCell.m */; };
+		D01210FA19737A970097B09B /* TMListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01210F819737A970097B09B /* TMListTableViewCell.xib */; };
 		D01B42B8196F9854004D13EA /* TMDataSourceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D01B42B6196F9854004D13EA /* TMDataSourceListViewController.m */; };
 		D01B42B9196F9854004D13EA /* TMDataSourceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01B42B7196F9854004D13EA /* TMDataSourceListViewController.xib */; };
 		D01B42BE196F9A16004D13EA /* TMDataSourceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D01B42BC196F9A16004D13EA /* TMDataSourceTableViewCell.m */; };
@@ -35,6 +37,9 @@
 		D006F314196D3ACA0086D383 /* TMListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMListViewController.h; sourceTree = "<group>"; };
 		D006F315196D3ACA0086D383 /* TMListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMListViewController.m; sourceTree = "<group>"; };
 		D006F316196D3ACA0086D383 /* TMListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TMListViewController.xib; sourceTree = "<group>"; };
+		D01210F619737A970097B09B /* TMListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMListTableViewCell.h; sourceTree = "<group>"; };
+		D01210F719737A970097B09B /* TMListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMListTableViewCell.m; sourceTree = "<group>"; };
+		D01210F819737A970097B09B /* TMListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TMListTableViewCell.xib; sourceTree = "<group>"; };
 		D01B42B5196F9854004D13EA /* TMDataSourceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMDataSourceListViewController.h; sourceTree = "<group>"; };
 		D01B42B6196F9854004D13EA /* TMDataSourceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMDataSourceListViewController.m; sourceTree = "<group>"; };
 		D01B42B7196F9854004D13EA /* TMDataSourceListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TMDataSourceListViewController.xib; sourceTree = "<group>"; };
@@ -85,6 +90,9 @@
 				D01B42BB196F9A16004D13EA /* TMDataSourceTableViewCell.h */,
 				D01B42BC196F9A16004D13EA /* TMDataSourceTableViewCell.m */,
 				D01B42BD196F9A16004D13EA /* TMDataSourceTableViewCell.xib */,
+				D01210F619737A970097B09B /* TMListTableViewCell.h */,
+				D01210F719737A970097B09B /* TMListTableViewCell.m */,
+				D01210F819737A970097B09B /* TMListTableViewCell.xib */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -236,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D01210FA19737A970097B09B /* TMListTableViewCell.xib in Resources */,
 				D01B42B9196F9854004D13EA /* TMDataSourceListViewController.xib in Resources */,
 				D0DC76E7196CE47A001EB2D3 /* Images.xcassets in Resources */,
 				D0DC7704196CE4A1001EB2D3 /* TMViewController.xib in Resources */,
@@ -292,6 +301,7 @@
 				D01B42BE196F9A16004D13EA /* TMDataSourceTableViewCell.m in Sources */,
 				D006F317196D3ACA0086D383 /* TMListViewController.m in Sources */,
 				D01B42B8196F9854004D13EA /* TMDataSourceListViewController.m in Sources */,
+				D01210F919737A970097B09B /* TMListTableViewCell.m in Sources */,
 				D05E8A53196F856200B633A3 /* TMDataManager.m in Sources */,
 				D05E8A56196F86EE00B633A3 /* CoreDataModel.xcdatamodeld in Sources */,
 				D0DC76DF196CE47A001EB2D3 /* TMAppDelegate.m in Sources */,

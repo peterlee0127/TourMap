@@ -32,14 +32,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
     self.menuViewController = [[TMMenuViewController alloc] initWithNibName:@"TMMenuViewController" bundle:nil];
     TMViewController *mainViewController = [[TMViewController alloc] initWithNibName:@"TMViewController" bundle:nil];
-    self.revealController = [PKRevealController revealControllerWithFrontViewController:mainViewController leftViewController:self.menuViewController];
-    self.revealController.delegate = self;
-    [self addmenuButton:mainViewController];
-
+      UINavigationController *nav= [[UINavigationController alloc] initWithRootViewController:mainViewController];
     
+    self.revealController = [PKRevealController revealControllerWithFrontViewController:nav leftViewController:self.menuViewController];
+    self.revealController.delegate = self;
+
     self.window.rootViewController = self.revealController;
     [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
@@ -51,13 +50,6 @@
 {
     [self.revealController showViewController:self.menuViewController];
 }
--(void) addmenuButton:(UIViewController *) vc;
-{
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    menuButton.backgroundColor = [UIColor grayColor];
-    [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchDown];
-    [vc.view addSubview:menuButton];
-}
 -(void) changeFrontVC:(NSNotification *) noti
 {
     NSUInteger index = [[noti object] integerValue];
@@ -65,22 +57,22 @@
         case 0:
         {
             TMViewController *mainViewController = [[TMViewController alloc] initWithNibName:@"TMViewController" bundle:nil];
-            [self.revealController setFrontViewController:mainViewController];
-            [self addmenuButton:mainViewController];
+            UINavigationController *nav= [[UINavigationController alloc] initWithRootViewController:mainViewController];
+            [self.revealController setFrontViewController:nav];
             break;
         }
         case 1:
         {
             TMListViewController *listViewController = [[TMListViewController alloc] initWithNibName:@"TMListViewController" bundle:nil];
-            [self.revealController setFrontViewController:listViewController];
-            [self addmenuButton:listViewController];
+            UINavigationController *nav= [[UINavigationController alloc] initWithRootViewController:listViewController];
+            [self.revealController setFrontViewController:nav];
             break;
         }
         case 2:
         {
             TMDataSourceListViewController *dataSourceListViewController = [[TMDataSourceListViewController alloc] initWithNibName:@"TMDataSourceListViewController" bundle:nil];
-            [self.revealController setFrontViewController:dataSourceListViewController];
-            [self addmenuButton:dataSourceListViewController];
+            UINavigationController *nav= [[UINavigationController alloc] initWithRootViewController:dataSourceListViewController];
+            [self.revealController setFrontViewController:nav];
             break;
         }
         default:

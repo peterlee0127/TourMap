@@ -17,6 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"Tour Map";
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -36,6 +37,9 @@
 {
     // Set mapView center to Current Location.
     self.mapView.centerCoordinate = self.locationManager.location.coordinate;
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 1500, 1500);
+    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
+    [self.mapView setRegion:adjustedRegion animated:YES];
 }
 -(void) addMapSettingButton
 {
