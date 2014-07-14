@@ -8,6 +8,7 @@
 
 #import "TMMenuViewController.h"
 #import <PKRevealController.h>
+#import "TMMenuTableViewCell.h"
 
 @interface TMMenuViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -31,22 +32,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.menuArray = @[@"Map",@"List",@"Source"];
+    self.menuArray = @[@"Map",@"List",@"Source",@"About"];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, 120,self.view.frame.size.height-20) style:UITableViewStylePlain];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TMMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"MenuCell"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     
-     [self.revealController setMinimumWidth:100.0 maximumWidth:120.0 forViewController:self];
+     [self.revealController setMinimumWidth:120.0 maximumWidth:124.0 forViewController:self];
     // Do any additional setup after loading the view from its nib.
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MenuCell"];
-    if(!cell)
-        cell = [[UITableViewCell alloc] init];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",self.menuArray[indexPath.row]];
+    TMMenuTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MenuCell"];
+    cell.menuLabel.text = [NSString stringWithFormat:@"%@",self.menuArray[indexPath.row]];
     
     return cell;
 }

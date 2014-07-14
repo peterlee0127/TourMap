@@ -40,9 +40,7 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell =[self.listTableView dequeueReusableCellWithIdentifier:@"ListCell"];
-    if(!cell)
-        cell = [[UITableViewCell alloc] init];
+    TMListTableViewCell *cell =[self.listTableView dequeueReusableCellWithIdentifier:@"ListCell"];
     
     return cell;
 }

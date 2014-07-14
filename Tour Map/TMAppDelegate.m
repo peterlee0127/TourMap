@@ -15,6 +15,7 @@
 #import "TMMenuViewController.h"
 #import "TMListViewController.h"
 #import "TMDataSourceListViewController.h"
+#import "TMAboutViewController.h"
 
 @interface TMAppDelegate() <PKRevealing>
 
@@ -34,11 +35,12 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.menuViewController = [[TMMenuViewController alloc] initWithNibName:@"TMMenuViewController" bundle:nil];
     TMViewController *mainViewController = [[TMViewController alloc] initWithNibName:@"TMViewController" bundle:nil];
-      UINavigationController *nav= [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    UINavigationController *nav= [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    mainViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
     
     self.revealController = [PKRevealController revealControllerWithFrontViewController:nav leftViewController:self.menuViewController];
     self.revealController.delegate = self;
-
+    
     self.window.rootViewController = self.revealController;
     [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
@@ -58,6 +60,7 @@
         {
             TMViewController *mainViewController = [[TMViewController alloc] initWithNibName:@"TMViewController" bundle:nil];
             UINavigationController *nav= [[UINavigationController alloc] initWithRootViewController:mainViewController];
+            mainViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
             [self.revealController setFrontViewController:nav];
             break;
         }
@@ -65,6 +68,7 @@
         {
             TMListViewController *listViewController = [[TMListViewController alloc] initWithNibName:@"TMListViewController" bundle:nil];
             UINavigationController *nav= [[UINavigationController alloc] initWithRootViewController:listViewController];
+            listViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
             [self.revealController setFrontViewController:nav];
             break;
         }
@@ -72,13 +76,22 @@
         {
             TMDataSourceListViewController *dataSourceListViewController = [[TMDataSourceListViewController alloc] initWithNibName:@"TMDataSourceListViewController" bundle:nil];
             UINavigationController *nav= [[UINavigationController alloc] initWithRootViewController:dataSourceListViewController];
+            dataSourceListViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
+            [self.revealController setFrontViewController:nav];
+            break;
+        }
+        case 3:
+        {
+            TMAboutViewController *aboutVC = [[TMAboutViewController alloc] initWithNibName:@"TMAboutViewController" bundle:nil];
+            UINavigationController *nav= [[UINavigationController alloc] initWithRootViewController:aboutVC];
+            aboutVC.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
             [self.revealController setFrontViewController:nav];
             break;
         }
         default:
             break;
     }
-     [self.revealController showViewController:self.revealController.rightViewController];
+    [self.revealController showViewController:self.revealController.rightViewController];
 }
 
 #pragma mark - Core Data stack

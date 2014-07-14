@@ -20,17 +20,17 @@ PODS:
   - AFNetworking/UIKit (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - FXBlurView (1.6.1)
+  - FXBlurView (1.5.5)
   - PKRevealController (2.0.6)
 
 DEPENDENCIES:
   - AFNetworking
-  - FXBlurView
+  - FXBlurView (= 1.5.5)
   - PKRevealController
 
 SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
-  FXBlurView: 1d01b96076d65027314d1be024c7506c292392aa
+  FXBlurView: 17f2d481b841cc310a6ef95605360283a5258d9f
   PKRevealController: 4f175a432ad868c806dce1ebb3fd8a35d228bdb5
 
 COCOAPODS: 0.33.1

@@ -8,6 +8,7 @@
 
 #import "TMDataSourceListViewController.h"
 #import "TMDataSourceTableViewCell.h"
+#import <FXBlurView.h>
 
 @interface TMDataSourceListViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -50,8 +51,12 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
-    headerView.backgroundColor = [UIColor yellowColor];
+    FXBlurView *headerView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
+    headerView.blurEnabled = YES;
+    headerView.dynamic = YES;
+    headerView.blurRadius =12;
+    headerView.tintColor = [UIColor clearColor];
+    headerView.backgroundColor = [UIColor clearColor];
     return headerView;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

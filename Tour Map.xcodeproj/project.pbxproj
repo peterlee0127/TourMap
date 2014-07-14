@@ -20,6 +20,11 @@
 		D03DE738196CE79300E17D86 /* TMMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03DE736196CE79300E17D86 /* TMMenuViewController.xib */; };
 		D05E8A53196F856200B633A3 /* TMDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D05E8A52196F856200B633A3 /* TMDataManager.m */; };
 		D05E8A56196F86EE00B633A3 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D05E8A54196F86EE00B633A3 /* CoreDataModel.xcdatamodeld */; };
+		D06FA22A197394D3001572E7 /* TMAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D06FA228197394D3001572E7 /* TMAboutViewController.m */; };
+		D06FA22B197394D3001572E7 /* TMAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D06FA229197394D3001572E7 /* TMAboutViewController.xib */; };
+		D0C0F9301973917C009ACD29 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = D0C0F92F1973917C009ACD29 /* menu.png */; };
+		D0D361A019737EA600196D7D /* TMMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D3619E19737EA600196D7D /* TMMenuTableViewCell.m */; };
+		D0D361A119737EA600196D7D /* TMMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0D3619F19737EA600196D7D /* TMMenuTableViewCell.xib */; };
 		D0DC76CF196CE47A001EB2D3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DC76CE196CE47A001EB2D3 /* Foundation.framework */; };
 		D0DC76D1196CE47A001EB2D3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DC76D0196CE47A001EB2D3 /* CoreGraphics.framework */; };
 		D0DC76D3196CE47A001EB2D3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DC76D2196CE47A001EB2D3 /* UIKit.framework */; };
@@ -52,6 +57,13 @@
 		D05E8A51196F856200B633A3 /* TMDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMDataManager.h; sourceTree = "<group>"; };
 		D05E8A52196F856200B633A3 /* TMDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMDataManager.m; sourceTree = "<group>"; };
 		D05E8A55196F86EE00B633A3 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		D06FA227197394D3001572E7 /* TMAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMAboutViewController.h; sourceTree = "<group>"; };
+		D06FA228197394D3001572E7 /* TMAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMAboutViewController.m; sourceTree = "<group>"; };
+		D06FA229197394D3001572E7 /* TMAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TMAboutViewController.xib; sourceTree = "<group>"; };
+		D0C0F92F1973917C009ACD29 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		D0D3619D19737EA600196D7D /* TMMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMMenuTableViewCell.h; sourceTree = "<group>"; };
+		D0D3619E19737EA600196D7D /* TMMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMMenuTableViewCell.m; sourceTree = "<group>"; };
+		D0D3619F19737EA600196D7D /* TMMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TMMenuTableViewCell.xib; sourceTree = "<group>"; };
 		D0DC76CB196CE47A001EB2D3 /* Tour Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tour Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0DC76CE196CE47A001EB2D3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D0DC76D0196CE47A001EB2D3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -103,6 +115,9 @@
 				D03DE734196CE79300E17D86 /* TMMenuViewController.h */,
 				D03DE735196CE79300E17D86 /* TMMenuViewController.m */,
 				D03DE736196CE79300E17D86 /* TMMenuViewController.xib */,
+				D0D3619D19737EA600196D7D /* TMMenuTableViewCell.h */,
+				D0D3619E19737EA600196D7D /* TMMenuTableViewCell.m */,
+				D0D3619F19737EA600196D7D /* TMMenuTableViewCell.xib */,
 			);
 			name = MenuViewController;
 			sourceTree = "<group>";
@@ -171,8 +186,12 @@
 				D01B42B5196F9854004D13EA /* TMDataSourceListViewController.h */,
 				D01B42B6196F9854004D13EA /* TMDataSourceListViewController.m */,
 				D01B42B7196F9854004D13EA /* TMDataSourceListViewController.xib */,
+				D06FA227197394D3001572E7 /* TMAboutViewController.h */,
+				D06FA228197394D3001572E7 /* TMAboutViewController.m */,
+				D06FA229197394D3001572E7 /* TMAboutViewController.xib */,
 				D01B42BA196F9A00004D13EA /* TableViewCell */,
 				D0DC76E6196CE47A001EB2D3 /* Images.xcassets */,
+				D0C0F92F1973917C009ACD29 /* menu.png */,
 				D0DC76D5196CE47A001EB2D3 /* Supporting Files */,
 			);
 			path = "Tour Map";
@@ -247,8 +266,11 @@
 				D01210FA19737A970097B09B /* TMListTableViewCell.xib in Resources */,
 				D01B42B9196F9854004D13EA /* TMDataSourceListViewController.xib in Resources */,
 				D0DC76E7196CE47A001EB2D3 /* Images.xcassets in Resources */,
+				D0D361A119737EA600196D7D /* TMMenuTableViewCell.xib in Resources */,
 				D0DC7704196CE4A1001EB2D3 /* TMViewController.xib in Resources */,
 				D01B42BF196F9A16004D13EA /* TMDataSourceTableViewCell.xib in Resources */,
+				D0C0F9301973917C009ACD29 /* menu.png in Resources */,
+				D06FA22B197394D3001572E7 /* TMAboutViewController.xib in Resources */,
 				D03DE738196CE79300E17D86 /* TMMenuViewController.xib in Resources */,
 				D006F318196D3ACA0086D383 /* TMListViewController.xib in Resources */,
 				D0DC76D9196CE47A001EB2D3 /* InfoPlist.strings in Resources */,
@@ -299,6 +321,8 @@
 				D0DC76DB196CE47A001EB2D3 /* main.m in Sources */,
 				D03DE737196CE79300E17D86 /* TMMenuViewController.m in Sources */,
 				D01B42BE196F9A16004D13EA /* TMDataSourceTableViewCell.m in Sources */,
+				D0D361A019737EA600196D7D /* TMMenuTableViewCell.m in Sources */,
+				D06FA22A197394D3001572E7 /* TMAboutViewController.m in Sources */,
 				D006F317196D3ACA0086D383 /* TMListViewController.m in Sources */,
 				D01B42B8196F9854004D13EA /* TMDataSourceListViewController.m in Sources */,
 				D01210F919737A970097B09B /* TMListTableViewCell.m in Sources */,

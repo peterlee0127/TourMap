@@ -1,3 +1,3 @@
 pod 'PKRevealController'
 pod 'AFNetworking'
-pod 'FXBlurView'
+pod "FXBlurView" , "1.5.5"
