@@ -23,6 +23,10 @@ app.get('/JapanTrip', function(req, res){
       res.sendfile('./public/japanMap.html');
 });
 
+app.get('/', function(req, res){
+      res.sendfile('./public/japanMap.html');
+});
+
 // Server Configure
 app.set('port', process.env.PORT || 8080);
 
