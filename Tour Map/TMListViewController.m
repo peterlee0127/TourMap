@@ -37,7 +37,6 @@
     self.listTableView.dataSource = self;
     [self.view addSubview:self.listTableView];
     
-    
     // Do any additional setup after loading the view from its nib.
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

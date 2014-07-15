@@ -14,5 +14,6 @@
 @dynamic enable;
 @dynamic name;
 @dynamic url;
+@dynamic date;
 
 @end

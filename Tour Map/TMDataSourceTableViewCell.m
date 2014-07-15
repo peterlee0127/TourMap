@@ -9,12 +9,36 @@
 #import "TMDataSourceTableViewCell.h"
 
 @implementation TMDataSourceTableViewCell
+{
+    UIView *disableBlur;
+}
 
 - (void)awakeFromNib
 {
     // Initialization code
 }
+-(void)layoutSubviews
+{
+    if(!disableBlur)
+    {
+        disableBlur = [[UIView alloc] initWithFrame:self.frame];
+        disableBlur.alpha = 0.8f;
+        disableBlur.backgroundColor = [UIColor whiteColor];
+        disableBlur.tintColor = [UIColor clearColor];
+        [self.contentView addSubview:disableBlur];
+    }
 
+    if(!self.enable)
+    {
+         self.contentView.backgroundColor = [UIColor colorWithWhite:0.926 alpha:1.000];
+        [disableBlur setHidden:NO];
+    }
+    else
+    {
+        [disableBlur setHidden:YES];
+    }
+
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

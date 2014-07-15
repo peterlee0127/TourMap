@@ -8,15 +8,16 @@
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Source" syncable="YES"/>
     </entity>
     <entity name="Source" representedClassName="Source" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="enable" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Source" inverseName="relationship" inverseEntity="Source" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Place" positionX="97" positionY="-0" width="200" height="165"/>
-        <element name="Source" positionX="-74" positionY="-0" width="128" height="90"/>
+        <element name="Place" positionX="142" positionY="41" width="200" height="148"/>
+        <element name="Source" positionX="-74" positionY="-0" width="128" height="118"/>
     </elements>
 </model>

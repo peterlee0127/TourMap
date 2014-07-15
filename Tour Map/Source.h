@@ -15,5 +15,6 @@
 @property (nonatomic, retain) NSNumber * enable;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * url;
+@property (nonatomic, retain) NSDate *date;
 
 @end
