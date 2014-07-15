@@ -14,10 +14,10 @@
 #import "Source.h"
 #import "TMDataManager.h"
 
-@interface TMDataSourceListViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface TMDataSourceListViewController () <UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic,strong) NSArray *sourceArray;
+@property (nonatomic,strong) NSMutableArray *sourceArray;
 
 @end
 
@@ -37,6 +37,7 @@
     [super viewDidLoad];
     self.title =@"DataSource";
     UIBarButtonItem *updateBarButton  =[[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStylePlain target:self action:@selector(updateAllSource)];
+    self.navigationItem.rightBarButtonItem = updateBarButton;
     
     [self fetchDataSource];
     
@@ -45,6 +46,12 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"TMDataSourceTableViewCell" bundle:nil] forCellReuseIdentifier:@"DataSourceList"];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+                                          initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 0.5; //seconds
+    lpgr.delegate = self;
+    [self.tableView addGestureRecognizer:lpgr];
   
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view from its nib.
@@ -64,12 +71,8 @@
     [request setSortDescriptors:@[sortDescriptor]];
     
     NSError *error;
-    self.sourceArray = [context executeFetchRequest:request error:&error];
+    self.sourceArray = [[context executeFetchRequest:request error:&error] mutableCopy];
     
-    [self.sourceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        Source *tempSource = (Source *)obj;
-        NSLog(@"%@-%@ %@",tempSource.name,tempSource.url,tempSource.enable);
-    }];
 }
 #pragma mark - UITableView DataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -78,14 +81,22 @@
     Source *source = self.sourceArray[indexPath.row];
     cell.nameLabel.text = source.name;
     cell.urlLabel.text = source.url;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if(![source.enable boolValue])
-        cell.backgroundColor = [UIColor grayColor];
+    {
+        cell.backgroundColor = [UIColor colorWithWhite:0.926 alpha:1.000];
+        cell.enableLabel.text = @"disable";
+    }
     else
+    {
         cell.backgroundColor = [UIColor clearColor];
+        cell.enableLabel.text = @"enable";
+    }
+
     
     return cell;
 }
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+-(UIView *)tableView:(UITableView *)tableㄉView viewForHeaderInSection:(NSInteger)section
 {
     FXBlurView *headerView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
     headerView.blurEnabled = YES;
@@ -96,12 +107,37 @@
     
     UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(55 , 10, 200, 40)];
     [addButton setTitle:@"Add more DataSource" forState:UIControlStateNormal];
-    addButton.titleLabel.textColor = [UIColor blackColor];
+    addButton.titleLabel.textColor = [UIColor colorWithWhite:0.253 alpha:1.000];
     addButton.backgroundColor = [UIColor clearColor];
     [addButton addTarget:self action:@selector(addSource) forControlEvents:UIControlEventTouchDown];
     [headerView addSubview:addButton];
     
     return headerView;
+}
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    CGPoint p = [gestureRecognizer locationInView:self.tableView];
+    if(gestureRecognizer.state ==UIGestureRecognizerStateBegan)
+    {
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
+    if (indexPath == nil)
+        return;
+    else
+    {
+        Source *tempSource = self.sourceArray[indexPath.row];
+        UIAlertView *alert =[[UIAlertView alloc] init];
+        alert.title = @"Delete this Source ?";
+        alert.message = tempSource.url;
+        alert.delegate = self;
+        [alert addButtonWithTitle:@"Delete"];
+        [alert addButtonWithTitle:@"Cancel"];
+        [self.tableView reloadData];
+        [alert show];
+        
+
+    }
+    }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -129,7 +165,6 @@
     NSPredicate *predicate=[NSPredicate predicateWithFormat:@"url==%@",tempSource.url]; // If required to fetch specific vehicle
     fetchRequest.predicate=predicate;
     Source *source=[[context executeFetchRequest:fetchRequest error:nil] lastObject];
-    
     [source setValue:@(![source.enable boolValue]) forKey:@"enable"];
  
     
@@ -156,14 +191,35 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex==1) // Cancel
+    {
+        [self.tableView reloadData];
         return;
+    }
+    if([alertView.title isEqualToString:@"Delete this Source ?"])
+    {
+        TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
+        NSManagedObjectContext *context = [delegate managedObjectContext];
+        NSFetchRequest *fetchRequest=[NSFetchRequest fetchRequestWithEntityName:@"Source"];
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"url==%@",alertView.message];
+        fetchRequest.predicate=predicate;
+        Source *source=[[context executeFetchRequest:fetchRequest error:nil] lastObject];
+        if(source==nil)
+            return;
+        [context deleteObject:source];
+        [context save:nil];
+        
+        [self fetchDataSource];
+        [self.tableView reloadData]; // tell table to refresh now
+        return;
+    }
+    TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
+    NSManagedObjectContext *context = [delegate managedObjectContext];
+
     
     UITextField *urlField = [alertView textFieldAtIndex:0];
     [[TMDataManager shareInstance] downloadData:urlField.text];
-
-    TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
     
-    NSManagedObjectContext *context = [delegate managedObjectContext];
+
     Source *source = [NSEntityDescription insertNewObjectForEntityForName:@"Source" inManagedObjectContext:context];
     source.url = urlField.text;
     source.name = urlField.text;

@@ -12,6 +12,8 @@
 
 @property (nonatomic,strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic,strong) IBOutlet UILabel *urlLabel;
-           
+@property (nonatomic,strong) IBOutlet UILabel *enableLabel;
+@property (nonatomic,strong) IBOutlet UILabel *statusLabel;
+
            
 @end
