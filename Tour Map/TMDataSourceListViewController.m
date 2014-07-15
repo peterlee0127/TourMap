@@ -41,9 +41,8 @@
     
     [self fetchDataSource];
     
-    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-    [self.tableView registerNib:[UINib nibWithNibName:@"TMDataSourceTableViewCell" bundle:nil] forCellReuseIdentifier:@"DataSourceList"];
+//    [self.tableView registerNib:[UINib nibWithNibName:@"TMDataSourceTableViewCell" bundle:nil] forCellReuseIdentifier:@"DataSourceList"];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     
@@ -72,29 +71,45 @@
     
     NSError *error;
     self.sourceArray = [[context executeFetchRequest:request error:&error] mutableCopy];
-    
+   
+//    [self.sourceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        Source *source = obj;
+//        NSLog(@"%@ %@",source.name,source.enable);
+//    }];
 }
 #pragma mark - UITableView DataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TMDataSourceTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"DataSourceList"];
+    if(cell==nil)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TMDataSourceTableViewCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
     Source *source = self.sourceArray[indexPath.row];
     cell.nameLabel.text = source.name;
     cell.urlLabel.text = source.url;
+    cell.enable = [source.enable boolValue];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if(![source.enable boolValue])
     {
-        cell.backgroundColor = [UIColor colorWithWhite:0.926 alpha:1.000];
-        cell.enableLabel.text = @"disable";
-        cell.enableLabel.textColor = [UIColor redColor];
+        cell.enable = NO;
     }
     else
     {
-        cell.backgroundColor = [UIColor clearColor];
-        cell.enableLabel.text = @"enable";
-        cell.enableLabel.textColor = [UIColor greenColor];
+        cell.enable=YES;
     }
-
+    
+    if(source.date == [NSDate date])
+    {
+        cell.statusLabel.text = @"updated";
+        cell.statusLabel.textColor = [UIColor greenColor];
+    }
+    else
+    {
+        cell.statusLabel.text = @"outdated";
+        cell.statusLabel.textColor = [UIColor redColor];
+    }
     
     return cell;
 }
@@ -169,11 +184,9 @@
     Source *source=[[context executeFetchRequest:fetchRequest error:nil] lastObject];
     [source setValue:@(![source.enable boolValue]) forKey:@"enable"];
  
-    
     [context save:nil];
     [self fetchDataSource];
     [self.tableView reloadData];
-    
 }
 
 #pragma mark - AddSource
@@ -226,6 +239,7 @@
     source.url = urlField.text;
     source.name = urlField.text;
     source.enable = @1;
+    source.date = [NSDate date];
     NSError *error ;
     if (![context save:&error]) {
         NSLog(@"Error: %@", [error localizedDescription]);
