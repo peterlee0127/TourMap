@@ -37,6 +37,9 @@
     TMViewController *mainViewController = [[TMViewController alloc] initWithNibName:@"TMViewController" bundle:nil];
     UINavigationController *nav= [[UINavigationController alloc] initWithRootViewController:mainViewController];
     mainViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
+   
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.056 green:0.614 blue:1.000 alpha:0.550]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     self.revealController = [PKRevealController revealControllerWithFrontViewController:nav leftViewController:self.menuViewController];
     self.revealController.delegate = self;

@@ -86,11 +86,13 @@
     {
         cell.backgroundColor = [UIColor colorWithWhite:0.926 alpha:1.000];
         cell.enableLabel.text = @"disable";
+        cell.enableLabel.textColor = [UIColor redColor];
     }
     else
     {
         cell.backgroundColor = [UIColor clearColor];
         cell.enableLabel.text = @"enable";
+        cell.enableLabel.textColor = [UIColor greenColor];
     }
 
     
