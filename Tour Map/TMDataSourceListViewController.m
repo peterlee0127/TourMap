@@ -9,10 +9,15 @@
 #import "TMDataSourceListViewController.h"
 #import "TMDataSourceTableViewCell.h"
 #import <FXBlurView.h>
+#import "TMAppDelegate.h"
+#import <CoreData/CoreData.h>
+#import "Source.h"
+#import "TMDataManager.h"
 
 @interface TMDataSourceListViewController () <UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) NSArray *sourceArray;
 
 @end
 
@@ -31,6 +36,11 @@
 {
     [super viewDidLoad];
     self.title =@"DataSource";
+    UIBarButtonItem *updateBarButton  =[[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStylePlain target:self action:@selector(updateAllSource)];
+    
+    [self fetchDataSource];
+    
+    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     [self.tableView registerNib:[UINib nibWithNibName:@"TMDataSourceTableViewCell" bundle:nil] forCellReuseIdentifier:@"DataSourceList"];
     self.tableView.delegate=self;
@@ -39,13 +49,39 @@
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view from its nib.
 }
-
+-(void) fetchDataSource
+{
+    TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    NSManagedObjectContext *context = [delegate managedObjectContext];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Source" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"url" ascending:YES];
+    [request setSortDescriptors:@[sortDescriptor]];
+    
+    NSError *error;
+    self.sourceArray = [context executeFetchRequest:request error:&error];
+    
+    [self.sourceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Source *tempSource = (Source *)obj;
+        NSLog(@"%@-%@ %@",tempSource.name,tempSource.url,tempSource.enable);
+    }];
+}
+#pragma mark - UITableView DataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TMDataSourceTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"DataSourceList"];
-    
-    cell.nameLabel.text = @"TW";
-    cell.urlLabel.text = @"url";
+    Source *source = self.sourceArray[indexPath.row];
+    cell.nameLabel.text = source.name;
+    cell.urlLabel.text = source.url;
+    if(![source.enable boolValue])
+        cell.backgroundColor = [UIColor grayColor];
+    else
+        cell.backgroundColor = [UIColor clearColor];
     
     return cell;
 }
@@ -69,7 +105,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.sourceArray.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -79,6 +115,30 @@
 {
     return 60;
 }
+
+#pragma mark - UITableView Delegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Source *tempSource=self.sourceArray[indexPath.row];
+   
+    TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    NSManagedObjectContext *context = [delegate managedObjectContext];
+    
+    NSFetchRequest *fetchRequest=[NSFetchRequest fetchRequestWithEntityName:@"Source"];
+    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"url==%@",tempSource.url]; // If required to fetch specific vehicle
+    fetchRequest.predicate=predicate;
+    Source *source=[[context executeFetchRequest:fetchRequest error:nil] lastObject];
+    
+    [source setValue:@(![source.enable boolValue]) forKey:@"enable"];
+ 
+    
+    [context save:nil];
+    [self fetchDataSource];
+    [self.tableView reloadData];
+    
+}
+
 #pragma mark - AddSource
 -(void) addSource
 {
@@ -99,10 +159,27 @@
         return;
     
     UITextField *urlField = [alertView textFieldAtIndex:0];
-    NSURL *url = [NSURL URLWithString:urlField.text];
-    NSLog(@"%@",url);
+    [[TMDataManager shareInstance] downloadData:urlField.text];
+
+    TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
     
+    NSManagedObjectContext *context = [delegate managedObjectContext];
+    Source *source = [NSEntityDescription insertNewObjectForEntityForName:@"Source" inManagedObjectContext:context];
+    source.url = urlField.text;
+    source.name = urlField.text;
+    source.enable = @1;
+    NSError *error ;
+    if (![context save:&error]) {
+        NSLog(@"Error: %@", [error localizedDescription]);
+    }
+
+
+    [self fetchDataSource];
     [self.tableView reloadData];
+}
+-(void) updateAllSource
+{
+
 }
 - (void)didReceiveMemoryWarning
 {

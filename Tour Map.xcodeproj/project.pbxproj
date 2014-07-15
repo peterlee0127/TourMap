@@ -20,6 +20,8 @@
 		D03DE738196CE79300E17D86 /* TMMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03DE736196CE79300E17D86 /* TMMenuViewController.xib */; };
 		D05E8A53196F856200B633A3 /* TMDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D05E8A52196F856200B633A3 /* TMDataManager.m */; };
 		D05E8A56196F86EE00B633A3 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D05E8A54196F86EE00B633A3 /* CoreDataModel.xcdatamodeld */; };
+		D064DB9D1974E44800D60699 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = D064DB9C1974E44800D60699 /* Source.m */; };
+		D064DBA01974E44900D60699 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = D064DB9F1974E44900D60699 /* Place.m */; };
 		D06FA22A197394D3001572E7 /* TMAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D06FA228197394D3001572E7 /* TMAboutViewController.m */; };
 		D06FA22B197394D3001572E7 /* TMAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D06FA229197394D3001572E7 /* TMAboutViewController.xib */; };
 		D0C0F9301973917C009ACD29 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = D0C0F92F1973917C009ACD29 /* menu.png */; };
@@ -57,6 +59,10 @@
 		D05E8A51196F856200B633A3 /* TMDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMDataManager.h; sourceTree = "<group>"; };
 		D05E8A52196F856200B633A3 /* TMDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMDataManager.m; sourceTree = "<group>"; };
 		D05E8A55196F86EE00B633A3 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		D064DB9B1974E44800D60699 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
+		D064DB9C1974E44800D60699 /* Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Source.m; sourceTree = "<group>"; };
+		D064DB9E1974E44900D60699 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
+		D064DB9F1974E44900D60699 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
 		D06FA227197394D3001572E7 /* TMAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMAboutViewController.h; sourceTree = "<group>"; };
 		D06FA228197394D3001572E7 /* TMAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMAboutViewController.m; sourceTree = "<group>"; };
 		D06FA229197394D3001572E7 /* TMAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TMAboutViewController.xib; sourceTree = "<group>"; };
@@ -136,6 +142,10 @@
 			isa = PBXGroup;
 			children = (
 				D05E8A54196F86EE00B633A3 /* CoreDataModel.xcdatamodeld */,
+				D064DB9E1974E44900D60699 /* Place.h */,
+				D064DB9F1974E44900D60699 /* Place.m */,
+				D064DB9B1974E44800D60699 /* Source.h */,
+				D064DB9C1974E44800D60699 /* Source.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -320,11 +330,13 @@
 				D0DC76E5196CE47A001EB2D3 /* TMViewController.m in Sources */,
 				D0DC76DB196CE47A001EB2D3 /* main.m in Sources */,
 				D03DE737196CE79300E17D86 /* TMMenuViewController.m in Sources */,
+				D064DB9D1974E44800D60699 /* Source.m in Sources */,
 				D01B42BE196F9A16004D13EA /* TMDataSourceTableViewCell.m in Sources */,
 				D0D361A019737EA600196D7D /* TMMenuTableViewCell.m in Sources */,
 				D06FA22A197394D3001572E7 /* TMAboutViewController.m in Sources */,
 				D006F317196D3ACA0086D383 /* TMListViewController.m in Sources */,
 				D01B42B8196F9854004D13EA /* TMDataSourceListViewController.m in Sources */,
+				D064DBA01974E44900D60699 /* Place.m in Sources */,
 				D01210F919737A970097B09B /* TMListTableViewCell.m in Sources */,
 				D05E8A53196F856200B633A3 /* TMDataManager.m in Sources */,
 				D05E8A56196F86EE00B633A3 /* CoreDataModel.xcdatamodeld in Sources */,
