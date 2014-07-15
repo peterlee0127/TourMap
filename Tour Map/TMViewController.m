@@ -43,14 +43,14 @@
 }
 -(void) addMapSettingButton
 {
-    UIButton *changeMapTypeButton = [[UIButton alloc] initWithFrame:CGRectMake(100, self.view.frame.size.height-44-5, 44, 44)];
+    UIButton *changeMapTypeButton = [[UIButton alloc] initWithFrame:CGRectMake(45, self.view.frame.size.height-30-5, 30, 30)];
     [changeMapTypeButton setTitle:@"Type" forState:UIControlStateNormal];
     changeMapTypeButton.titleLabel.font = [UIFont fontWithName:@"Arial" size:12];
     changeMapTypeButton.backgroundColor = [UIColor grayColor];
     [changeMapTypeButton addTarget:self action:@selector(changeMapType) forControlEvents:UIControlEventTouchDown];
     [self.mapView addSubview:changeMapTypeButton];
    
-    UIButton *showCurrentLocationButton = [[UIButton alloc] initWithFrame:CGRectMake(5, self.view.frame.size.height-44-5, 44, 44)];
+    UIButton *showCurrentLocationButton = [[UIButton alloc] initWithFrame:CGRectMake(4, self.view.frame.size.height-30-5, 30, 30)];
     showCurrentLocationButton.backgroundColor = [UIColor brownColor];
     [showCurrentLocationButton addTarget:self action:@selector(showLocation) forControlEvents:UIControlEventTouchDown];
     [self.mapView addSubview:showCurrentLocationButton];
