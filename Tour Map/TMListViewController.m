@@ -31,7 +31,7 @@
 {
     [super viewDidLoad];
     self.title =@"Place List";
-    self.listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    self.listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height)];
     [self.listTableView registerNib:[UINib nibWithNibName:@"TMListTableViewCell" bundle:nil] forCellReuseIdentifier:@"ListCell"];
     self.listTableView.delegate = self;
     self.listTableView.dataSource = self;

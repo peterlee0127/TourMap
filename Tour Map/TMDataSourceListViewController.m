@@ -41,8 +41,8 @@
     
     [self fetchDataSource];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-//    [self.tableView registerNib:[UINib nibWithNibName:@"TMDataSourceTableViewCell" bundle:nil] forCellReuseIdentifier:@"DataSourceList"];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height)];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TMDataSourceTableViewCell" bundle:nil] forCellReuseIdentifier:@"DataSourceList"];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     
@@ -81,25 +81,21 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TMDataSourceTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"DataSourceList"];
-    if(cell==nil)
-    {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TMDataSourceTableViewCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
+//    if(cell==nil)
+//    {
+//        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TMDataSourceTableViewCell" owner:self options:nil];
+//        cell = [nib objectAtIndex:0];
+//    }
     Source *source = self.sourceArray[indexPath.row];
     cell.nameLabel.text = source.name;
     cell.urlLabel.text = source.url;
     cell.enable = [source.enable boolValue];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if(![source.enable boolValue])
-    {
+    if(!cell.enable)
         cell.enable = NO;
-    }
     else
-    {
         cell.enable=YES;
-    }
-    
+    [cell layoutSubviews];
     if(source.date == [NSDate date])
     {
         cell.statusLabel.text = @"updated";
@@ -113,7 +109,7 @@
     
     return cell;
 }
--(UIView *)tableView:(UITableView *)tableㄉView viewForHeaderInSection:(NSInteger)section
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     FXBlurView *headerView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
     headerView.blurEnabled = YES;
@@ -122,14 +118,35 @@
     headerView.tintColor = [UIColor clearColor];
     headerView.backgroundColor = [UIColor clearColor];
     
+    
     UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(55 , 10, 200, 40)];
-    [addButton setTitle:@"Add more DataSource" forState:UIControlStateNormal];
-    addButton.titleLabel.textColor = [UIColor colorWithWhite:0.253 alpha:1.000];
+    [addButton setTitle:NSLocalizedString(@"Add Source", nil) forState:UIControlStateNormal];
+    addButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    addButton.titleLabel.textColor = [UIColor colorWithWhite:0.557 alpha:1.000];
     addButton.backgroundColor = [UIColor clearColor];
     [addButton addTarget:self action:@selector(addSource) forControlEvents:UIControlEventTouchDown];
     [headerView addSubview:addButton];
     
     return headerView;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    FXBlurView *footerView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    footerView.blurEnabled = YES;
+    footerView.dynamic = YES;
+    footerView.blurRadius =12;
+    footerView.tintColor = [UIColor clearColor];
+    footerView.backgroundColor = [UIColor clearColor];
+    
+    UIButton *addSuggectionButton = [[UIButton alloc] initWithFrame:CGRectMake(55 ,5 , 200, 30)];
+    addSuggectionButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [addSuggectionButton setTitle:NSLocalizedString(@"Add Template Source", nil) forState:UIControlStateNormal];
+    addSuggectionButton.titleLabel.textColor = [UIColor colorWithWhite:0.557 alpha:1.000];
+    addSuggectionButton.backgroundColor = [UIColor clearColor];
+    [addSuggectionButton addTarget:self action:@selector(addSuggestionPlace) forControlEvents:UIControlEventTouchDown];
+    [footerView addSubview:addSuggectionButton];
+    
+    return footerView;
 }
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
 {
@@ -137,23 +154,22 @@
     if(gestureRecognizer.state ==UIGestureRecognizerStateBegan)
     {
     
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
-    if (indexPath == nil)
-        return;
-    else
-    {
-        Source *tempSource = self.sourceArray[indexPath.row];
-        UIAlertView *alert =[[UIAlertView alloc] init];
-        alert.title = @"Delete this Source ?";
-        alert.message = tempSource.url;
-        alert.delegate = self;
-        [alert addButtonWithTitle:@"Delete"];
-        [alert addButtonWithTitle:@"Cancel"];
-        [self.tableView reloadData];
-        [alert show];
-        
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
+        if (indexPath == nil)
+            return;
+        else
+        {
+            Source *tempSource = self.sourceArray[indexPath.row];
+            UIAlertView *alert =[[UIAlertView alloc] init];
+            alert.title = @"Delete this Source ?";
+            alert.message = tempSource.url;
+            alert.delegate = self;
+            [alert addButtonWithTitle:@"Delete"];
+            [alert addButtonWithTitle:@"Cancel"];
+            [self.tableView reloadData];
+            [alert show];
 
-    }
+        }
     }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -168,12 +184,15 @@
 {
     return 60;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 40;
+}
 
 #pragma mark - UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Source *tempSource=self.sourceArray[indexPath.row];
-   
     TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
     
     NSManagedObjectContext *context = [delegate managedObjectContext];
@@ -202,6 +221,10 @@
     [alert addButtonWithTitle:@"Cancel"];
 
     [alert show];
+}
+-(void) addSuggestionPlace
+{
+    [self.tableView reloadData];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {

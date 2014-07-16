@@ -7,35 +7,46 @@
 //
 
 #import "TMDataSourceTableViewCell.h"
+#import <FXBlurView.h>
+
+@interface TMDataSourceTableViewCell()
+
+@property (nonatomic,strong)  FXBlurView *disableBlur;
+
+@end
 
 @implementation TMDataSourceTableViewCell
-{
-    UIView *disableBlur;
-}
-
 - (void)awakeFromNib
 {
     // Initialization code
 }
 -(void)layoutSubviews
 {
-    if(!disableBlur)
+    [super layoutSubviews];
+    if(!self.disableBlur)
     {
-        disableBlur = [[UIView alloc] initWithFrame:self.frame];
-        disableBlur.alpha = 0.8f;
-        disableBlur.backgroundColor = [UIColor whiteColor];
-        disableBlur.tintColor = [UIColor clearColor];
-        [self.contentView addSubview:disableBlur];
+        self.disableBlur = [[FXBlurView alloc] initWithFrame:self.frame];
+        self.disableBlur.blurEnabled = YES;
+        self.disableBlur.blurRadius = 22;
+        self.disableBlur.backgroundColor = [UIColor whiteColor];
+        self.disableBlur.tintColor = [UIColor clearColor];
+        UILabel *clicktoEnable = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 300, 40)];
+        clicktoEnable.text = @"Click to enable this Source";
+        clicktoEnable.textColor = [UIColor colorWithWhite:0.557 alpha:1.000];
+        clicktoEnable.textAlignment = NSTextAlignmentCenter;
+        [self.disableBlur addSubview:clicktoEnable];
+        [self.contentView addSubview:self.disableBlur];
     }
 
     if(!self.enable)
     {
          self.contentView.backgroundColor = [UIColor colorWithWhite:0.926 alpha:1.000];
-        [disableBlur setHidden:NO];
+        [self.disableBlur setHidden:NO];
     }
     else
     {
-        [disableBlur setHidden:YES];
+        self.contentView.backgroundColor = [UIColor clearColor];
+        [self.disableBlur setHidden:YES];
     }
 
 }
