@@ -12,16 +12,20 @@
 #import "TMAppDelegate.h"
 #import <CoreData/CoreData.h>
 #import "Source.h"
+#import "Place.h"
 #import "TMDataManager.h"
+#import <AFNetworking.h>
 
-@interface TMDataSourceListViewController () <UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate>
+@interface TMDataSourceListViewController () <UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate,NSFetchedResultsControllerDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic,strong) NSMutableArray *sourceArray;
+@property (nonatomic,strong) NSFetchedResultsController *fetchResultsController;
 
 @end
 
+
 @implementation TMDataSourceListViewController
+@synthesize fetchResultsController = _fetchResultsController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,7 +43,15 @@
     UIBarButtonItem *updateBarButton  =[[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStylePlain target:self action:@selector(updateAllSource)];
     self.navigationItem.rightBarButtonItem = updateBarButton;
     
-    [self fetchDataSource];
+    NSError *error;
+	if (![[self fetchedResultsController] performFetch:&error]) {
+		// Update to handle the error appropriately.
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		exit(-1);  // Fail
+	}
+    
+    self.title = @"Failed Banks";
+    
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height)];
     [self.tableView registerNib:[UINib nibWithNibName:@"TMDataSourceTableViewCell" bundle:nil] forCellReuseIdentifier:@"DataSourceList"];
@@ -55,38 +67,37 @@
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view from its nib.
 }
--(void) fetchDataSource
-{
-    TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    NSManagedObjectContext *context = [delegate managedObjectContext];
-    NSEntityDescription *entityDescription = [NSEntityDescription
-                                              entityForName:@"Source" inManagedObjectContext:context];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDescription];
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-                                        initWithKey:@"url" ascending:YES];
-    [request setSortDescriptors:@[sortDescriptor]];
-    
-    NSError *error;
-    self.sourceArray = [[context executeFetchRequest:request error:&error] mutableCopy];
+- (NSFetchedResultsController *)fetchedResultsController {
    
-//    [self.sourceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//        Source *source = obj;
-//        NSLog(@"%@ %@",source.name,source.enable);
-//    }];
+    TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    
+    if (_fetchResultsController != nil) {
+        return _fetchResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Source" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"url" ascending:NO];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                        managedObjectContext:context sectionNameKeyPath:nil
+                                                   cacheName:@"SourceCache"];
+    self.fetchResultsController = theFetchedResultsController;
+    _fetchResultsController.delegate = self;
+    
+    return _fetchResultsController;
+    
 }
-#pragma mark - UITableView DataSource
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    TMDataSourceTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"DataSourceList"];
-//    if(cell==nil)
-//    {
-//        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TMDataSourceTableViewCell" owner:self options:nil];
-//        cell = [nib objectAtIndex:0];
-//    }
-    Source *source = self.sourceArray[indexPath.row];
+
+- (void)configureCell:(TMDataSourceTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+  
+    Source *source  = [self.fetchResultsController objectAtIndexPath:indexPath];
     cell.nameLabel.text = source.name;
     cell.urlLabel.text = source.url;
     cell.enable = [source.enable boolValue];
@@ -106,6 +117,13 @@
         cell.statusLabel.text = @"outdated";
         cell.statusLabel.textColor = [UIColor redColor];
     }
+}
+
+#pragma mark - UITableView DataSource
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TMDataSourceTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"DataSourceList"];
+    [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
@@ -159,7 +177,7 @@
             return;
         else
         {
-            Source *tempSource = self.sourceArray[indexPath.row];
+            Source *tempSource = [self.fetchResultsController objectAtIndexPath:indexPath];
             UIAlertView *alert =[[UIAlertView alloc] init];
             alert.title = @"Delete this Source ?";
             alert.message = tempSource.url;
@@ -174,7 +192,9 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.sourceArray.count;
+    id  sectionInfo =
+    [[self.fetchResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -192,19 +212,10 @@
 #pragma mark - UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Source *tempSource=self.sourceArray[indexPath.row];
-    TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
+   Source *temp= [self.fetchResultsController objectAtIndexPath:indexPath];
+    [temp setValue:@(![temp.enable boolValue]) forKey:@"enable"];
+    [self.fetchResultsController.managedObjectContext save:nil];
     
-    NSManagedObjectContext *context = [delegate managedObjectContext];
-    
-    NSFetchRequest *fetchRequest=[NSFetchRequest fetchRequestWithEntityName:@"Source"];
-    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"url==%@",tempSource.url]; // If required to fetch specific vehicle
-    fetchRequest.predicate=predicate;
-    Source *source=[[context executeFetchRequest:fetchRequest error:nil] lastObject];
-    [source setValue:@(![source.enable boolValue]) forKey:@"enable"];
- 
-    [context save:nil];
-    [self fetchDataSource];
     [self.tableView reloadData];
 }
 
@@ -235,44 +246,123 @@
     }
     if([alertView.title isEqualToString:@"Delete this Source ?"])
     {
-        TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
-        NSManagedObjectContext *context = [delegate managedObjectContext];
         NSFetchRequest *fetchRequest=[NSFetchRequest fetchRequestWithEntityName:@"Source"];
         NSPredicate *predicate=[NSPredicate predicateWithFormat:@"url==%@",alertView.message];
         fetchRequest.predicate=predicate;
-        Source *source=[[context executeFetchRequest:fetchRequest error:nil] lastObject];
+        Source *source=[[self.fetchResultsController.managedObjectContext executeFetchRequest:fetchRequest error:nil] lastObject];
         if(source==nil)
             return;
-        [context deleteObject:source];
-        [context save:nil];
+        [self.fetchResultsController.managedObjectContext deleteObject:source];
+        [self.fetchResultsController.managedObjectContext save:nil];
         
-        [self fetchDataSource];
-        [self.tableView reloadData]; // tell table to refresh now
+        [self.tableView reloadData];
+
+        
         return;
     }
-    TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
-    NSManagedObjectContext *context = [delegate managedObjectContext];
-
     
     UITextField *urlField = [alertView textFieldAtIndex:0];
-    [[TMDataManager shareInstance] downloadData:urlField.text];
     
-
-    Source *source = [NSEntityDescription insertNewObjectForEntityForName:@"Source" inManagedObjectContext:context];
-    source.url = urlField.text;
-    source.name = urlField.text;
-    source.enable = @1;
-    source.date = [NSDate date];
-    NSError *error ;
-    if (![context save:&error]) {
-        NSLog(@"Error: %@", [error localizedDescription]);
-    }
-
-
-    [self fetchDataSource];
-    [self.tableView reloadData];
+    AFHTTPRequestOperationManager *manager =[[AFHTTPRequestOperationManager alloc] init];
+    [manager GET:urlField.text parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       
+        NSLog(@"Source has content ,save");
+        
+        
+        TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
+        NSManagedObjectContext *context = [delegate managedObjectContext];
+        
+        Source *source = [NSEntityDescription insertNewObjectForEntityForName:@"Source" inManagedObjectContext:context];
+        source.url = urlField.text;
+        source.name = urlField.text;
+        source.enable = @1;
+        source.date = [NSDate date];
+//        source.place = [self convertToPlaceModel:responseObject];
+        NSError *error ;
+        if (![context save:&error]) {
+            NSLog(@"Error: %@", [error localizedDescription]);
+        }
+        
+        
+        [self.tableView reloadData];
+         
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URL Fail" message:@"Please check your source url." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+        [self.tableView reloadData];
+    }];
+    
+  
 }
--(void) updateAllSource
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:(TMDataSourceTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id )sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView endUpdates];
+}
+-(NSData *) convertToPlaceModel:(NSArray *) array
+{
+    NSMutableArray *mutableArr = [[NSMutableArray alloc] init];
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dict = (NSDictionary *)obj;
+        Place *tempPlace = [[Place alloc] init];
+        tempPlace.type = dict[@"type"];
+        tempPlace.name = dict[@"title"];
+        tempPlace.latitude = [NSNumber numberWithFloat:[dict[@"latitude"] floatValue]];
+        tempPlace.longitude = [NSNumber numberWithFloat:[dict[@"longitude"] floatValue]];
+        tempPlace.date = dict[@"date"];
+        tempPlace.detail = dict[@"placeDetail"];
+        [mutableArr addObject:tempPlace];
+    }];
+     return [NSKeyedArchiver archivedDataWithRootObject:mutableArr];
+}
+-(void) updateAllSource;
 {
 
 }
