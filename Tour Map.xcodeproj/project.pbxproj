@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B634E0D3F56C432390346BF3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A196262872554D9A97D93542 /* libPods.a */; };
+		D0066CB51977BB9C0044EBED /* TMSuggestionSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0066CB41977BB9C0044EBED /* TMSuggestionSourceViewController.m */; };
+		D0066CB71977BC490044EBED /* TMSuggestionSourceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0066CB61977BC490044EBED /* TMSuggestionSourceViewController.xib */; };
 		D006F317196D3ACA0086D383 /* TMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D006F315196D3ACA0086D383 /* TMListViewController.m */; };
 		D006F318196D3ACA0086D383 /* TMListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D006F316196D3ACA0086D383 /* TMListViewController.xib */; };
 		D01210F919737A970097B09B /* TMListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D01210F719737A970097B09B /* TMListTableViewCell.m */; };
@@ -42,6 +44,9 @@
 /* Begin PBXFileReference section */
 		803BF46C0A3940FCA9B01073 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A196262872554D9A97D93542 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0066CB31977BB9C0044EBED /* TMSuggestionSourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMSuggestionSourceViewController.h; sourceTree = "<group>"; };
+		D0066CB41977BB9C0044EBED /* TMSuggestionSourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMSuggestionSourceViewController.m; sourceTree = "<group>"; };
+		D0066CB61977BC490044EBED /* TMSuggestionSourceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TMSuggestionSourceViewController.xib; sourceTree = "<group>"; };
 		D006F314196D3ACA0086D383 /* TMListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMListViewController.h; sourceTree = "<group>"; };
 		D006F315196D3ACA0086D383 /* TMListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMListViewController.m; sourceTree = "<group>"; };
 		D006F316196D3ACA0086D383 /* TMListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TMListViewController.xib; sourceTree = "<group>"; };
@@ -106,6 +111,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D0066CB81977C2C70044EBED /* DataSouceViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D01B42B5196F9854004D13EA /* TMDataSourceListViewController.h */,
+				D01B42B6196F9854004D13EA /* TMDataSourceListViewController.m */,
+				D01B42B7196F9854004D13EA /* TMDataSourceListViewController.xib */,
+				D0066CB31977BB9C0044EBED /* TMSuggestionSourceViewController.h */,
+				D0066CB41977BB9C0044EBED /* TMSuggestionSourceViewController.m */,
+				D0066CB61977BC490044EBED /* TMSuggestionSourceViewController.xib */,
+			);
+			name = DataSouceViewController;
+			sourceTree = "<group>";
+		};
 		D01B42BA196F9A00004D13EA /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,9 +217,7 @@
 				D006F314196D3ACA0086D383 /* TMListViewController.h */,
 				D006F315196D3ACA0086D383 /* TMListViewController.m */,
 				D006F316196D3ACA0086D383 /* TMListViewController.xib */,
-				D01B42B5196F9854004D13EA /* TMDataSourceListViewController.h */,
-				D01B42B6196F9854004D13EA /* TMDataSourceListViewController.m */,
-				D01B42B7196F9854004D13EA /* TMDataSourceListViewController.xib */,
+				D0066CB81977C2C70044EBED /* DataSouceViewController */,
 				D06FA227197394D3001572E7 /* TMAboutViewController.h */,
 				D06FA228197394D3001572E7 /* TMAboutViewController.m */,
 				D06FA229197394D3001572E7 /* TMAboutViewController.xib */,
@@ -290,6 +306,7 @@
 				D06FA22B197394D3001572E7 /* TMAboutViewController.xib in Resources */,
 				D03DE738196CE79300E17D86 /* TMMenuViewController.xib in Resources */,
 				D006F318196D3ACA0086D383 /* TMListViewController.xib in Resources */,
+				D0066CB71977BC490044EBED /* TMSuggestionSourceViewController.xib in Resources */,
 				D0DC76D9196CE47A001EB2D3 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,6 +365,7 @@
 				D05E8A53196F856200B633A3 /* TMDataManager.m in Sources */,
 				D05E8A56196F86EE00B633A3 /* CoreDataModel.xcdatamodeld in Sources */,
 				D0DC76DF196CE47A001EB2D3 /* TMAppDelegate.m in Sources */,
+				D0066CB51977BB9C0044EBED /* TMSuggestionSourceViewController.m in Sources */,
 				D06BE169197664FC00F27101 /* Place.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

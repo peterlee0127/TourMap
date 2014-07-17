@@ -7,6 +7,7 @@
 //
 
 #import "TMDataSourceListViewController.h"
+#import "TMSuggestionSourceViewController.h"
 #import "TMDataSourceTableViewCell.h"
 #import <FXBlurView.h>
 #import "TMAppDelegate.h"
@@ -15,6 +16,7 @@
 #import "Place.h"
 #import "TMDataManager.h"
 #import <AFNetworking.h>
+#import <SVProgressHUD.h>
 
 @interface TMDataSourceListViewController () <UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate,NSFetchedResultsControllerDelegate>
 
@@ -50,22 +52,25 @@
 		exit(-1);  // Fail
 	}
     
-    self.title = @"Failed Banks";
-    
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height)];
     [self.tableView registerNib:[UINib nibWithNibName:@"TMDataSourceTableViewCell" bundle:nil] forCellReuseIdentifier:@"DataSourceList"];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    [self.view addSubview:self.tableView];
     
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
                                           initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 0.5; //seconds
     lpgr.delegate = self;
     [self.tableView addGestureRecognizer:lpgr];
-  
-    [self.view addSubview:self.tableView];
+
+ 
     // Do any additional setup after loading the view from its nib.
+}
+-(void) viewWillAppear:(BOOL)animated
+{
+   [self addFooterView];
 }
 - (NSFetchedResultsController *)fetchedResultsController {
    
@@ -147,25 +152,7 @@
     
     return headerView;
 }
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    FXBlurView *footerView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-    footerView.blurEnabled = YES;
-    footerView.dynamic = YES;
-    footerView.blurRadius =12;
-    footerView.tintColor = [UIColor clearColor];
-    footerView.backgroundColor = [UIColor clearColor];
-    
-    UIButton *addSuggectionButton = [[UIButton alloc] initWithFrame:CGRectMake(55 ,5 , 200, 30)];
-    addSuggectionButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [addSuggectionButton setTitle:NSLocalizedString(@"Add Template Source", nil) forState:UIControlStateNormal];
-    addSuggectionButton.titleLabel.textColor = [UIColor colorWithWhite:0.557 alpha:1.000];
-    addSuggectionButton.backgroundColor = [UIColor clearColor];
-    [addSuggectionButton addTarget:self action:@selector(addSuggestionPlace) forControlEvents:UIControlEventTouchDown];
-    [footerView addSubview:addSuggectionButton];
-    
-    return footerView;
-}
+
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
 {
     CGPoint p = [gestureRecognizer locationInView:self.tableView];
@@ -204,10 +191,6 @@
 {
     return 60;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 40;
-}
 
 #pragma mark - UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -235,7 +218,11 @@
 }
 -(void) addSuggestionPlace
 {
+    TMSuggestionSourceViewController *suggectionSourceVC = [[TMSuggestionSourceViewController alloc] initWithNibName:@"TMSuggestionSourceViewController" bundle:nil];
+    [self.navigationController pushViewController:suggectionSourceVC animated:YES];
+    
     [self.tableView reloadData];
+    
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -262,12 +249,29 @@
     }
     
     UITextField *urlField = [alertView textFieldAtIndex:0];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     
     AFHTTPRequestOperationManager *manager =[[AFHTTPRequestOperationManager alloc] init];
     [manager GET:urlField.text parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
        
-        NSLog(@"Source has content ,save");
+        NSLog(@"Source has content");
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // time-consuming task
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+        });
         
+        NSFetchRequest *fetchRequest=[NSFetchRequest fetchRequestWithEntityName:@"Source"];
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"url==%@",urlField.text];
+        fetchRequest.predicate=predicate;
+        Source *temp=[[self.fetchResultsController.managedObjectContext executeFetchRequest:fetchRequest error:nil] lastObject];
+        if(temp)
+        {
+            NSLog(@"exist");
+            return;
+        }
+      
         
         TMAppDelegate *delegate = (TMAppDelegate *)[UIApplication sharedApplication].delegate;
         NSManagedObjectContext *context = [delegate managedObjectContext];
@@ -288,9 +292,15 @@
          
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URL Fail" message:@"Please check your source url." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Fetch Source Fail" message:@"Please check your source url." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
-        
+       
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // time-consuming task
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+        });
         [self.tableView reloadData];
     }];
     
@@ -365,6 +375,24 @@
 -(void) updateAllSource;
 {
 
+}
+-(void) addFooterView;
+{
+    FXBlurView *footerView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height-60, 320, 60)];
+    footerView.blurEnabled = YES;
+    footerView.blurRadius = 12;
+    footerView.tintColor = [UIColor clearColor];
+    footerView.backgroundColor = [UIColor clearColor];
+    
+    UIButton *addSuggectionButton = [[UIButton alloc] initWithFrame:CGRectMake(55 ,15 , 200, 30)];
+    addSuggectionButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [addSuggectionButton setTitle:NSLocalizedString(@"Add Template Source", nil) forState:UIControlStateNormal];
+    addSuggectionButton.titleLabel.textColor = [UIColor colorWithWhite:0.557 alpha:1.000];
+    addSuggectionButton.backgroundColor = [UIColor clearColor];
+    [addSuggectionButton addTarget:self action:@selector(addSuggestionPlace) forControlEvents:UIControlEventTouchDown];
+    [footerView addSubview:addSuggectionButton];
+
+    [self.view addSubview:footerView];
 }
 - (void)didReceiveMemoryWarning
 {
