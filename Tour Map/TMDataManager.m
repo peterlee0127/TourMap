@@ -23,6 +23,7 @@
 -(void) downloadData:(NSString *)url
 {
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"]; 
     [manager GET:url parameters:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
         

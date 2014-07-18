@@ -17,7 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Tour Map";
+    self.title = NSLocalizedString(@"MainTitle", nil);
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -41,19 +41,19 @@
 
 -(void) addMapSettingButton
 {
-    UIButton *showCurrentLocationButton = [[UIButton alloc] initWithFrame:CGRectMake(4, self.view.frame.size.height-40-5, 40, 40)];
+    UIButton *showCurrentLocationButton = [[UIButton alloc] initWithFrame:CGRectMake(4, [UIScreen mainScreen].bounds.size.height-40-5, 40, 40)];
     showCurrentLocationButton.backgroundColor = [UIColor brownColor];
     [showCurrentLocationButton addTarget:self action:@selector(showLocation) forControlEvents:UIControlEventTouchDown];
     [self.mapView addSubview:showCurrentLocationButton];
     
-    UIButton *changeMapTypeButton = [[UIButton alloc] initWithFrame:CGRectMake(50, self.view.frame.size.height-40-5, 40, 40)];
+    UIButton *changeMapTypeButton = [[UIButton alloc] initWithFrame:CGRectMake(50, [UIScreen mainScreen].bounds.size.height-40-5, 40, 40)];
     [changeMapTypeButton setTitle:@"Type" forState:UIControlStateNormal];
     changeMapTypeButton.titleLabel.font = [UIFont fontWithName:@"Arial" size:12];
     changeMapTypeButton.backgroundColor = [UIColor grayColor];
     [changeMapTypeButton addTarget:self action:@selector(changeMapType) forControlEvents:UIControlEventTouchDown];
     [self.mapView addSubview:changeMapTypeButton];
     
-    UIButton *updateDataButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-40-5, self.view.frame.size.height-40-5, 40, 40)];
+    UIButton *updateDataButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-40-5, [UIScreen mainScreen].bounds.size.height-40-5, 40, 40)];
     updateDataButton.backgroundColor = [UIColor yellowColor];
     [updateDataButton addTarget:self action:@selector(updateData) forControlEvents:UIControlEventTouchDown];
     [self.mapView addSubview:updateDataButton];

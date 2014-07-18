@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B634E0D3F56C432390346BF3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A196262872554D9A97D93542 /* libPods.a */; };
+		D0066CB51977BB9C0044EBED /* TMSuggestionSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0066CB41977BB9C0044EBED /* TMSuggestionSourceViewController.m */; };
+		D0066CB71977BC490044EBED /* TMSuggestionSourceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0066CB61977BC490044EBED /* TMSuggestionSourceViewController.xib */; };
 		D006F317196D3ACA0086D383 /* TMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D006F315196D3ACA0086D383 /* TMListViewController.m */; };
 		D006F318196D3ACA0086D383 /* TMListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D006F316196D3ACA0086D383 /* TMListViewController.xib */; };
 		D01210F919737A970097B09B /* TMListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D01210F719737A970097B09B /* TMListTableViewCell.m */; };
@@ -20,8 +22,10 @@
 		D03DE738196CE79300E17D86 /* TMMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03DE736196CE79300E17D86 /* TMMenuViewController.xib */; };
 		D05E8A53196F856200B633A3 /* TMDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D05E8A52196F856200B633A3 /* TMDataManager.m */; };
 		D05E8A56196F86EE00B633A3 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D05E8A54196F86EE00B633A3 /* CoreDataModel.xcdatamodeld */; };
-		D064DB9D1974E44800D60699 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = D064DB9C1974E44800D60699 /* Source.m */; };
-		D064DBA01974E44900D60699 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = D064DB9F1974E44900D60699 /* Place.m */; };
+		D0658D181977D645000966E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0658D1A1977D645000966E0 /* Localizable.strings */; };
+		D06BE169197664FC00F27101 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = D06BE168197664FC00F27101 /* Place.m */; };
+		D06BE16C197664FC00F27101 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = D06BE16B197664FC00F27101 /* Source.m */; };
+		D06BE16F197666A500F27101 /* TMDataConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = D06BE16E197666A500F27101 /* TMDataConvert.m */; };
 		D06FA22A197394D3001572E7 /* TMAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D06FA228197394D3001572E7 /* TMAboutViewController.m */; };
 		D06FA22B197394D3001572E7 /* TMAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D06FA229197394D3001572E7 /* TMAboutViewController.xib */; };
 		D0C0F9301973917C009ACD29 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = D0C0F92F1973917C009ACD29 /* menu.png */; };
@@ -30,7 +34,6 @@
 		D0DC76CF196CE47A001EB2D3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DC76CE196CE47A001EB2D3 /* Foundation.framework */; };
 		D0DC76D1196CE47A001EB2D3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DC76D0196CE47A001EB2D3 /* CoreGraphics.framework */; };
 		D0DC76D3196CE47A001EB2D3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DC76D2196CE47A001EB2D3 /* UIKit.framework */; };
-		D0DC76D9196CE47A001EB2D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0DC76D7196CE47A001EB2D3 /* InfoPlist.strings */; };
 		D0DC76DB196CE47A001EB2D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DC76DA196CE47A001EB2D3 /* main.m */; };
 		D0DC76DF196CE47A001EB2D3 /* TMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DC76DE196CE47A001EB2D3 /* TMAppDelegate.m */; };
 		D0DC76E5196CE47A001EB2D3 /* TMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DC76E4196CE47A001EB2D3 /* TMViewController.m */; };
@@ -41,6 +44,9 @@
 /* Begin PBXFileReference section */
 		803BF46C0A3940FCA9B01073 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A196262872554D9A97D93542 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0066CB31977BB9C0044EBED /* TMSuggestionSourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMSuggestionSourceViewController.h; sourceTree = "<group>"; };
+		D0066CB41977BB9C0044EBED /* TMSuggestionSourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMSuggestionSourceViewController.m; sourceTree = "<group>"; };
+		D0066CB61977BC490044EBED /* TMSuggestionSourceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TMSuggestionSourceViewController.xib; sourceTree = "<group>"; };
 		D006F314196D3ACA0086D383 /* TMListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMListViewController.h; sourceTree = "<group>"; };
 		D006F315196D3ACA0086D383 /* TMListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMListViewController.m; sourceTree = "<group>"; };
 		D006F316196D3ACA0086D383 /* TMListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TMListViewController.xib; sourceTree = "<group>"; };
@@ -59,10 +65,14 @@
 		D05E8A51196F856200B633A3 /* TMDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMDataManager.h; sourceTree = "<group>"; };
 		D05E8A52196F856200B633A3 /* TMDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMDataManager.m; sourceTree = "<group>"; };
 		D05E8A55196F86EE00B633A3 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
-		D064DB9B1974E44800D60699 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
-		D064DB9C1974E44800D60699 /* Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Source.m; sourceTree = "<group>"; };
-		D064DB9E1974E44900D60699 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
-		D064DB9F1974E44900D60699 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
+		D0658D191977D645000966E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0658D1B1977D647000966E0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D06BE167197664FC00F27101 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
+		D06BE168197664FC00F27101 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
+		D06BE16A197664FC00F27101 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
+		D06BE16B197664FC00F27101 /* Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Source.m; sourceTree = "<group>"; };
+		D06BE16D197666A500F27101 /* TMDataConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMDataConvert.h; sourceTree = "<group>"; };
+		D06BE16E197666A500F27101 /* TMDataConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMDataConvert.m; sourceTree = "<group>"; };
 		D06FA227197394D3001572E7 /* TMAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMAboutViewController.h; sourceTree = "<group>"; };
 		D06FA228197394D3001572E7 /* TMAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMAboutViewController.m; sourceTree = "<group>"; };
 		D06FA229197394D3001572E7 /* TMAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TMAboutViewController.xib; sourceTree = "<group>"; };
@@ -75,7 +85,6 @@
 		D0DC76D0196CE47A001EB2D3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D0DC76D2196CE47A001EB2D3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D0DC76D6196CE47A001EB2D3 /* Tour Map-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tour Map-Info.plist"; sourceTree = "<group>"; };
-		D0DC76D8196CE47A001EB2D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D0DC76DA196CE47A001EB2D3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D0DC76DC196CE47A001EB2D3 /* Tour Map-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tour Map-Prefix.pch"; sourceTree = "<group>"; };
 		D0DC76DD196CE47A001EB2D3 /* TMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMAppDelegate.h; sourceTree = "<group>"; };
@@ -102,6 +111,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D0066CB81977C2C70044EBED /* DataSouceViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D01B42B5196F9854004D13EA /* TMDataSourceListViewController.h */,
+				D01B42B6196F9854004D13EA /* TMDataSourceListViewController.m */,
+				D01B42B7196F9854004D13EA /* TMDataSourceListViewController.xib */,
+				D0066CB31977BB9C0044EBED /* TMSuggestionSourceViewController.h */,
+				D0066CB41977BB9C0044EBED /* TMSuggestionSourceViewController.m */,
+				D0066CB61977BC490044EBED /* TMSuggestionSourceViewController.xib */,
+			);
+			name = DataSouceViewController;
+			sourceTree = "<group>";
+		};
 		D01B42BA196F9A00004D13EA /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +156,8 @@
 				D0CB67E4196FA56900106DD4 /* CoreData */,
 				D05E8A51196F856200B633A3 /* TMDataManager.h */,
 				D05E8A52196F856200B633A3 /* TMDataManager.m */,
+				D06BE16D197666A500F27101 /* TMDataConvert.h */,
+				D06BE16E197666A500F27101 /* TMDataConvert.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -142,10 +166,10 @@
 			isa = PBXGroup;
 			children = (
 				D05E8A54196F86EE00B633A3 /* CoreDataModel.xcdatamodeld */,
-				D064DB9E1974E44900D60699 /* Place.h */,
-				D064DB9F1974E44900D60699 /* Place.m */,
-				D064DB9B1974E44800D60699 /* Source.h */,
-				D064DB9C1974E44800D60699 /* Source.m */,
+				D06BE16A197664FC00F27101 /* Source.h */,
+				D06BE16B197664FC00F27101 /* Source.m */,
+				D06BE167197664FC00F27101 /* Place.h */,
+				D06BE168197664FC00F27101 /* Place.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -193,9 +217,7 @@
 				D006F314196D3ACA0086D383 /* TMListViewController.h */,
 				D006F315196D3ACA0086D383 /* TMListViewController.m */,
 				D006F316196D3ACA0086D383 /* TMListViewController.xib */,
-				D01B42B5196F9854004D13EA /* TMDataSourceListViewController.h */,
-				D01B42B6196F9854004D13EA /* TMDataSourceListViewController.m */,
-				D01B42B7196F9854004D13EA /* TMDataSourceListViewController.xib */,
+				D0066CB81977C2C70044EBED /* DataSouceViewController */,
 				D06FA227197394D3001572E7 /* TMAboutViewController.h */,
 				D06FA228197394D3001572E7 /* TMAboutViewController.m */,
 				D06FA229197394D3001572E7 /* TMAboutViewController.xib */,
@@ -210,8 +232,8 @@
 		D0DC76D5196CE47A001EB2D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D0658D1A1977D645000966E0 /* Localizable.strings */,
 				D0DC76D6196CE47A001EB2D3 /* Tour Map-Info.plist */,
-				D0DC76D7196CE47A001EB2D3 /* InfoPlist.strings */,
 				D0DC76DA196CE47A001EB2D3 /* main.m */,
 				D0DC76DC196CE47A001EB2D3 /* Tour Map-Prefix.pch */,
 			);
@@ -257,6 +279,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = D0DC76C2196CE47A001EB2D3;
 			productRefGroup = D0DC76CC196CE47A001EB2D3 /* Products */;
@@ -274,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D01210FA19737A970097B09B /* TMListTableViewCell.xib in Resources */,
+				D0658D181977D645000966E0 /* Localizable.strings in Resources */,
 				D01B42B9196F9854004D13EA /* TMDataSourceListViewController.xib in Resources */,
 				D0DC76E7196CE47A001EB2D3 /* Images.xcassets in Resources */,
 				D0D361A119737EA600196D7D /* TMMenuTableViewCell.xib in Resources */,
@@ -283,7 +307,7 @@
 				D06FA22B197394D3001572E7 /* TMAboutViewController.xib in Resources */,
 				D03DE738196CE79300E17D86 /* TMMenuViewController.xib in Resources */,
 				D006F318196D3ACA0086D383 /* TMListViewController.xib in Resources */,
-				D0DC76D9196CE47A001EB2D3 /* InfoPlist.strings in Resources */,
+				D0066CB71977BC490044EBED /* TMSuggestionSourceViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,30 +353,33 @@
 			files = (
 				D0DC76E5196CE47A001EB2D3 /* TMViewController.m in Sources */,
 				D0DC76DB196CE47A001EB2D3 /* main.m in Sources */,
+				D06BE16C197664FC00F27101 /* Source.m in Sources */,
 				D03DE737196CE79300E17D86 /* TMMenuViewController.m in Sources */,
-				D064DB9D1974E44800D60699 /* Source.m in Sources */,
 				D01B42BE196F9A16004D13EA /* TMDataSourceTableViewCell.m in Sources */,
 				D0D361A019737EA600196D7D /* TMMenuTableViewCell.m in Sources */,
 				D06FA22A197394D3001572E7 /* TMAboutViewController.m in Sources */,
 				D006F317196D3ACA0086D383 /* TMListViewController.m in Sources */,
 				D01B42B8196F9854004D13EA /* TMDataSourceListViewController.m in Sources */,
-				D064DBA01974E44900D60699 /* Place.m in Sources */,
 				D01210F919737A970097B09B /* TMListTableViewCell.m in Sources */,
+				D06BE16F197666A500F27101 /* TMDataConvert.m in Sources */,
 				D05E8A53196F856200B633A3 /* TMDataManager.m in Sources */,
 				D05E8A56196F86EE00B633A3 /* CoreDataModel.xcdatamodeld in Sources */,
 				D0DC76DF196CE47A001EB2D3 /* TMAppDelegate.m in Sources */,
+				D0066CB51977BB9C0044EBED /* TMSuggestionSourceViewController.m in Sources */,
+				D06BE169197664FC00F27101 /* Place.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D0DC76D7196CE47A001EB2D3 /* InfoPlist.strings */ = {
+		D0658D1A1977D645000966E0 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D0DC76D8196CE47A001EB2D3 /* en */,
+				D0658D191977D645000966E0 /* en */,
+				D0658D1B1977D647000966E0 /* zh-Hant */,
 			);
-			name = InfoPlist.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -439,6 +466,7 @@
 				INFOPLIST_FILE = "Tour Map/Tour Map-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4817E034-3D76-4316-8539-E8974924F42C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -454,6 +482,7 @@
 				INFOPLIST_FILE = "Tour Map/Tour Map-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4817E034-3D76-4316-8539-E8974924F42C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

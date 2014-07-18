@@ -34,7 +34,7 @@
     [super viewDidLoad];
     self.menuArray = @[@"Map",@"List",@"Source",@"About"];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, 120,self.view.frame.size.height-20) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, 120,[UIScreen mainScreen].bounds.size.height-20) style:UITableViewStylePlain];
     [self.tableView registerNib:[UINib nibWithNibName:@"TMMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"MenuCell"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

@@ -2,24 +2,22 @@
 //  Place.h
 //  Tour Map
 //
-//  Created by Peterlee on 7/15/14.
+//  Created by Peterlee on 7/16/14.
 //  Copyright (c) 2014 Peterlee. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
-@class Source;
 
-@interface Place : NSManagedObject
+@interface Place :NSObject
 
-@property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) NSString * detail;
-@property (nonatomic, retain) NSData * image;
-@property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * type;
-@property (nonatomic, retain) Source *relationship;
+@property (nonatomic, assign) NSDate * date;
+@property (nonatomic, assign) NSString * detail;
+@property (nonatomic, assign) NSData * image;
+@property (nonatomic, assign) NSNumber * latitude;
+@property (nonatomic, assign) NSNumber * longitude;
+@property (nonatomic, assign) NSString * name;
+@property (nonatomic, assign) NSString * type;
+@property (nonatomic, assign) NSString * imageurl;
 
 @end
