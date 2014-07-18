@@ -22,6 +22,7 @@
 		D03DE738196CE79300E17D86 /* TMMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03DE736196CE79300E17D86 /* TMMenuViewController.xib */; };
 		D05E8A53196F856200B633A3 /* TMDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D05E8A52196F856200B633A3 /* TMDataManager.m */; };
 		D05E8A56196F86EE00B633A3 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D05E8A54196F86EE00B633A3 /* CoreDataModel.xcdatamodeld */; };
+		D0658D181977D645000966E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0658D1A1977D645000966E0 /* Localizable.strings */; };
 		D06BE169197664FC00F27101 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = D06BE168197664FC00F27101 /* Place.m */; };
 		D06BE16C197664FC00F27101 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = D06BE16B197664FC00F27101 /* Source.m */; };
 		D06BE16F197666A500F27101 /* TMDataConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = D06BE16E197666A500F27101 /* TMDataConvert.m */; };
@@ -33,7 +34,6 @@
 		D0DC76CF196CE47A001EB2D3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DC76CE196CE47A001EB2D3 /* Foundation.framework */; };
 		D0DC76D1196CE47A001EB2D3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DC76D0196CE47A001EB2D3 /* CoreGraphics.framework */; };
 		D0DC76D3196CE47A001EB2D3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DC76D2196CE47A001EB2D3 /* UIKit.framework */; };
-		D0DC76D9196CE47A001EB2D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0DC76D7196CE47A001EB2D3 /* InfoPlist.strings */; };
 		D0DC76DB196CE47A001EB2D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DC76DA196CE47A001EB2D3 /* main.m */; };
 		D0DC76DF196CE47A001EB2D3 /* TMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DC76DE196CE47A001EB2D3 /* TMAppDelegate.m */; };
 		D0DC76E5196CE47A001EB2D3 /* TMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DC76E4196CE47A001EB2D3 /* TMViewController.m */; };
@@ -62,10 +62,11 @@
 		D03DE734196CE79300E17D86 /* TMMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMMenuViewController.h; sourceTree = "<group>"; };
 		D03DE735196CE79300E17D86 /* TMMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMMenuViewController.m; sourceTree = "<group>"; };
 		D03DE736196CE79300E17D86 /* TMMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TMMenuViewController.xib; sourceTree = "<group>"; };
-		D04550551976345800B7DC2D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D05E8A51196F856200B633A3 /* TMDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMDataManager.h; sourceTree = "<group>"; };
 		D05E8A52196F856200B633A3 /* TMDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMDataManager.m; sourceTree = "<group>"; };
 		D05E8A55196F86EE00B633A3 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		D0658D191977D645000966E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0658D1B1977D647000966E0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D06BE167197664FC00F27101 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
 		D06BE168197664FC00F27101 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
 		D06BE16A197664FC00F27101 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
@@ -84,7 +85,6 @@
 		D0DC76D0196CE47A001EB2D3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D0DC76D2196CE47A001EB2D3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D0DC76D6196CE47A001EB2D3 /* Tour Map-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tour Map-Info.plist"; sourceTree = "<group>"; };
-		D0DC76D8196CE47A001EB2D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D0DC76DA196CE47A001EB2D3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D0DC76DC196CE47A001EB2D3 /* Tour Map-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tour Map-Prefix.pch"; sourceTree = "<group>"; };
 		D0DC76DD196CE47A001EB2D3 /* TMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMAppDelegate.h; sourceTree = "<group>"; };
@@ -232,8 +232,8 @@
 		D0DC76D5196CE47A001EB2D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D0658D1A1977D645000966E0 /* Localizable.strings */,
 				D0DC76D6196CE47A001EB2D3 /* Tour Map-Info.plist */,
-				D0DC76D7196CE47A001EB2D3 /* InfoPlist.strings */,
 				D0DC76DA196CE47A001EB2D3 /* main.m */,
 				D0DC76DC196CE47A001EB2D3 /* Tour Map-Prefix.pch */,
 			);
@@ -297,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D01210FA19737A970097B09B /* TMListTableViewCell.xib in Resources */,
+				D0658D181977D645000966E0 /* Localizable.strings in Resources */,
 				D01B42B9196F9854004D13EA /* TMDataSourceListViewController.xib in Resources */,
 				D0DC76E7196CE47A001EB2D3 /* Images.xcassets in Resources */,
 				D0D361A119737EA600196D7D /* TMMenuTableViewCell.xib in Resources */,
@@ -307,7 +308,6 @@
 				D03DE738196CE79300E17D86 /* TMMenuViewController.xib in Resources */,
 				D006F318196D3ACA0086D383 /* TMListViewController.xib in Resources */,
 				D0066CB71977BC490044EBED /* TMSuggestionSourceViewController.xib in Resources */,
-				D0DC76D9196CE47A001EB2D3 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,13 +373,13 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D0DC76D7196CE47A001EB2D3 /* InfoPlist.strings */ = {
+		D0658D1A1977D645000966E0 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D0DC76D8196CE47A001EB2D3 /* en */,
-				D04550551976345800B7DC2D /* zh-Hant */,
+				D0658D191977D645000966E0 /* en */,
+				D0658D1B1977D647000966E0 /* zh-Hant */,
 			);
-			name = InfoPlist.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -17,7 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Tour Map";
+    self.title = NSLocalizedString(@"MainTitle", nil);
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;

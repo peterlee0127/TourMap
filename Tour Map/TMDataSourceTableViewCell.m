@@ -31,7 +31,7 @@
         self.disableBlur.backgroundColor = [UIColor whiteColor];
         self.disableBlur.tintColor = [UIColor clearColor];
         UILabel *clicktoEnable = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 300, 40)];
-        clicktoEnable.text = @"Click to enable this Source";
+        clicktoEnable.text = NSLocalizedString(@"Click to enable this Source",nil);
         clicktoEnable.textColor = [UIColor colorWithWhite:0.557 alpha:1.000];
         clicktoEnable.textAlignment = NSTextAlignmentCenter;
         [self.disableBlur addSubview:clicktoEnable];

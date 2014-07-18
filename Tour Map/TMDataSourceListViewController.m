@@ -42,7 +42,7 @@
 {
     [super viewDidLoad];
     self.title =@"DataSource";
-    UIBarButtonItem *updateBarButton  =[[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStylePlain target:self action:@selector(updateAllSource)];
+    UIBarButtonItem *updateBarButton  =[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Update", nil) style:UIBarButtonItemStylePlain target:self action:@selector(updateAllSource)];
     self.navigationItem.rightBarButtonItem = updateBarButton;
     
     NSError *error;
@@ -252,6 +252,7 @@
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     
     AFHTTPRequestOperationManager *manager =[[AFHTTPRequestOperationManager alloc] init];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     [manager GET:urlField.text parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
        
         NSLog(@"Source has content");

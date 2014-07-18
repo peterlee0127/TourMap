@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  Tour Map
+
+  Created by Peterlee on 7/17/14.
+  Copyright (c) 2014 Peterlee. All rights reserved.
+*/
+
+"CFBundleDisplayName" = "TourMap";
+"CFBundleName" = "TourMap";
+
+"MainTitle" = "TourMap";
+
+"Update" = "Update";
+"Click to enable this Source" = "Click to enable this Source";
+"Add Source" = "Add Source";
+"Add Template Source" = "Add Template Source";

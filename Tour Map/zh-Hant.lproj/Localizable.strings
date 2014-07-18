@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  Tour Map
+
+  Created by Peterlee on 7/17/14.
+  Copyright (c) 2014 Peterlee. All rights reserved.
+*/
+
+"CFBundleDisplayName" = "旅遊地圖";
+"CFBundleName" = "旅遊地圖";
+
+"MainTitle" = "旅遊地圖";
+"Update" = "更新";
+"Click to enable this Source" = "按下來啟用";
+
+"Add Source" = "加入更多資料";
+"Add Template Source" = "加入範例來源";
