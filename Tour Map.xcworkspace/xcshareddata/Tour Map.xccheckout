@@ -12,20 +12,24 @@
 	<dict>
 		<key>3AFC9214-84ED-4327-B8C7-9E18A5F6613E</key>
 		<string>https://github.com/peterlee0127/TourMap.git</string>
+		<key>4FB50081677938140F313DA87A9457E8FC3D6232</key>
+		<string>https://github.com/peterlee0127/TourMap.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Tour Map.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3AFC9214-84ED-4327-B8C7-9E18A5F6613E</key>
+		<string>../../Tour Map</string>
+		<key>4FB50081677938140F313DA87A9457E8FC3D6232</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/peterlee0127/TourMap.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>3AFC9214-84ED-4327-B8C7-9E18A5F6613E</string>
+	<string>4FB50081677938140F313DA87A9457E8FC3D6232</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>3AFC9214-84ED-4327-B8C7-9E18A5F6613E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Tour Map</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4FB50081677938140F313DA87A9457E8FC3D6232</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Tour%20Map</string>
 		</dict>
 	</array>
 </dict>
